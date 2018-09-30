@@ -2,6 +2,7 @@ package com.gavin.kotlindependencyinjection.base
 
 import android.app.Application
 import com.gavin.kotlindependencyinjection.utils.main
+import com.zhouyou.http.EasyHttp
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.androidModule
@@ -25,7 +26,7 @@ class MyApplication : Application(), KodeinAware {
 
     override fun onCreate() {
         super.onCreate()
-
+        EasyHttp.init(this)
     }
 
 

@@ -25,10 +25,13 @@ class MainPresenter : MainContact.Presenter {
     }
 
     override fun showData() {
-        print("showdata")
         val a = (mView as MainActivity)
         val intent = Intent(a, Main2Activity::class.java)
         a.startActivity(intent)
+
+//        GavinHttp.get().execute(object :simplecallback(){
+//
+//        })
 
     }
 

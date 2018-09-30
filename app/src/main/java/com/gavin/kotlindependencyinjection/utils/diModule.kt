@@ -16,4 +16,5 @@ val main = Kodein.Module("main"){
 //        TestC()
 //    }
     bind<MainPresenter>() with instance(MainPresenter())
+
 }

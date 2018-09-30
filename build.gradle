@@ -2,6 +2,9 @@
 
 buildscript {
     ext.kotlin_version = '1.2.70'
+    ext.retrofit_version="2.4.0"
+    ext.rxjava="2.2.0"
+    ext.rxandroid="2.0.2"
     repositories {
         maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
         google()
@@ -19,6 +22,7 @@ buildscript {
 allprojects {
     repositories {
         maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+        maven { url "https://jitpack.io" }
         google()
         jcenter()
     }
