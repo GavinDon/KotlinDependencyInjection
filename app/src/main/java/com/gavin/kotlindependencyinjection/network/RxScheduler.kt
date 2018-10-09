@@ -1,6 +1,7 @@
 package com.gavin.kotlindependencyinjection.network
 
 import io.reactivex.ObservableTransformer
+import io.reactivex.SingleTransformer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -14,6 +15,13 @@ class RxScheduler {
     companion object {
         fun <T> applyScheduler(): ObservableTransformer<T, T> {
             return ObservableTransformer {
+                it.subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+            }
+        }
+
+        fun <T> applySingle(): SingleTransformer<T, T> {
+            return SingleTransformer {
                 it.subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
             }
