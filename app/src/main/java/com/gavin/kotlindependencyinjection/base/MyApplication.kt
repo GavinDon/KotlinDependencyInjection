@@ -1,8 +1,11 @@
 package com.gavin.kotlindependencyinjection.base
 
 import android.app.Application
+import android.content.Context
 import com.gavin.kotlindependencyinjection.utils.main
+import com.gavin.kotlindependencyinjection.utils.responseInterceptor
 import com.github.kittinunf.fuel.core.FuelManager
+import com.github.kittinunf.fuel.core.interceptors.cUrlLoggingRequestInterceptor
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.androidModule
@@ -13,6 +16,9 @@ import org.kodein.di.android.androidModule
 
  */
 class MyApplication : Application(), KodeinAware {
+    companion object {
+        lateinit var appContext: Context
+    }
 
     //首次检索时将创建的真实kodein对象
     override val kodein = Kodein.lazy {
@@ -26,10 +32,15 @@ class MyApplication : Application(), KodeinAware {
 
     override fun onCreate() {
         super.onCreate()
-        FuelManager.instance.basePath= "http://www.wanandroid.com/"
+        FuelManager.instance.apply {
+            basePath = "http://www.wanandroid.com/"
+            addRequestInterceptor(cUrlLoggingRequestInterceptor())
+            addResponseInterceptor(responseInterceptor())
+        }
+
+        appContext = this
 
     }
-
 
 
 }

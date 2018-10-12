@@ -1,7 +1,11 @@
 package com.gavin.kotlindependencyinjection.utils
 
 import android.view.View
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.customview.customView
+import com.gavin.kotlindependencyinjection.R
 import com.github.kittinunf.fuel.core.Request
+import com.github.kittinunf.fuel.core.Response
 
 /**
  * description:
@@ -20,25 +24,19 @@ fun View.px2dip(pxValue: Float): Int {
     return (pxValue / scale + 0.5f).toInt()
 }
 
-/**
- * 添加请求对象 方便在onDestroy时取消请求
- */
-fun Request.addList(): Request {
-    if (!::mList.isInitialized) {
-        mList = arrayListOf()
-    } else {
-        mList.add(this)
-    }
-    return this
+fun MaterialDialog.showLoading() {
+    this.customView(R.layout.dialog_loading)
+            .show()
 }
 
-fun getRequestList(): ArrayList<Request> {
-    return if (!::mList.isInitialized) {
-        arrayListOf()
-    } else {
-        mList
+ fun  responseInterceptor() = { next: (Request, Response) -> Response ->
+    { req: Request, res: Response ->
+        println(res.toString())
+        println(req.toString())
+        next(req, res)
     }
-
 }
+
+
 
 

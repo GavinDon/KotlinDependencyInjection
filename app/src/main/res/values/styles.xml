@@ -8,4 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.Custom" parent="Theme.AppCompat">
+
+        <item name="md_corner_radius">16dp</item>
+
+    </style>
+
 </resources>

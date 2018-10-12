@@ -1,7 +1,7 @@
 package com.gavin.kotlindependencyinjection.ui
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.gavin.kotlindependencyinjection.R
 
 class Main2Activity : AppCompatActivity() {

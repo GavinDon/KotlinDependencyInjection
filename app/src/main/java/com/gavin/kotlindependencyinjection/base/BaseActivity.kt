@@ -1,8 +1,8 @@
 package com.gavin.kotlindependencyinjection.base
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.Window
+import androidx.appcompat.app.AppCompatActivity
 import com.gavin.kotlindependencyinjection.mvp.MvpCompanion
 import com.gavin.kotlindependencyinjection.ui.test
 import org.kodein.di.Copy

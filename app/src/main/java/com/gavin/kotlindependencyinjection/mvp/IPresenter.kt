@@ -1,8 +1,8 @@
 package com.gavin.kotlindependencyinjection.mvp
 
-import android.arch.lifecycle.Lifecycle
-import android.arch.lifecycle.LifecycleObserver
-import android.arch.lifecycle.OnLifecycleEvent
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.OnLifecycleEvent
 
 /**
  * description: 为了在activity or fragment destroy时 释放绑定的presenter
