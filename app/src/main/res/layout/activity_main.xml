@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/background_light"
+    android:orientation="vertical"
     tools:context=".ui.MainActivity">
 
-    <Button
-        android:id="@+id/animation_view2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        />
+    <include layout="@layout/app_title"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+   <Button
+       android:id="@+id/btn_navigation"
+       android:layout_width="match_parent"
+       android:layout_height="48dp"
+       android:text="navigation"
+       />
+
+
+
+
+</LinearLayout>

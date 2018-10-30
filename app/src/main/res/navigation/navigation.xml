@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/navigation"
+            app:startDestination="@+id/title_screen">
+
+    <fragment
+        android:id="@+id/title_screen"
+        android:name="com.gavin.kotlindependencyinjection.ui.RegisterFragment"
+        tools:layout="@layout/fragment_title_screen"
+        android:label="fragment_title_screen">
+        <action
+            android:id="@+id/action_title_screen_to_register"
+            app:destination="@id/register"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_title_screen_to_register2"
+            app:destination="@id/register"/>
+        <!--   <action
+               android:id="@+id/action_title_screen_to_leaderboard"
+               app:destination="@id/leaderboard"
+               app:enterAnim="@anim/slide_in_right"
+               app:exitAnim="@anim/slide_out_left"
+               app:popEnterAnim="@anim/slide_in_left"
+               app:popExitAnim="@anim/slide_out_right"/>-->
+    </fragment>
+
+    <activity
+        android:id="@+id/register"
+        android:name="com.gavin.kotlindependencyinjection.ui.Main2Activity"
+        />
+
+
+
+</navigation>

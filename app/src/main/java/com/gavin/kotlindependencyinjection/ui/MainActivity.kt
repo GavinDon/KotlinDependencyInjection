@@ -1,8 +1,12 @@
 package com.gavin.kotlindependencyinjection.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
+import androidx.annotation.MainThread
+import com.allenliu.versionchecklib.v2.AllenVersionChecker
+import com.allenliu.versionchecklib.v2.builder.UIData
 import com.gavin.kotlindependencyinjection.R
 import com.gavin.kotlindependencyinjection.SubjectCat
 import com.gavin.kotlindependencyinjection.base.BaseActivity
@@ -10,6 +14,7 @@ import com.gavin.kotlindependencyinjection.bean.HomeRespBean
 import com.gavin.kotlindependencyinjection.fuel.FuelApi
 import com.gavin.kotlindependencyinjection.mvp.contact.MainContact
 import com.gavin.kotlindependencyinjection.mvp.presenter.MainPresenter
+import com.gavin.kotlindependencyinjection.mvvm.TestViewMode
 import com.gavin.kotlindependencyinjection.network.RxScheduler
 import com.gavin.kotlindependencyinjection.proxy.ISubject
 import com.gavin.kotlindependencyinjection.proxy.ProxyHandler
@@ -19,41 +24,50 @@ import com.github.kittinunf.fuel.httpDownload
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.fuel.rx.rx_bytes
 import io.reactivex.disposables.CompositeDisposable
+import kotlinx.android.synthetic.main.activity_main.*
 import org.kodein.di.generic.instance
 import java.io.File
 import java.lang.reflect.Proxy
-import java.util.*
+
 
 class MainActivity : BaseActivity(), MainContact.View {
+
+
+    override val layoutId: Int
+        get() = R.layout.activity_main
+
     //    创建一个空的复合disposable类 来管理订阅
     private val compositeDisposable = CompositeDisposable()
-
-    override fun update(o: Observable?, arg: Any?) {
-        Log.i("hello", arg.toString())
-    }
-
-
     private val mPresenter: MainPresenter by instance()
+    private lateinit var mViewModel: TestViewMode
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+    override fun initView(savedInstanceState: Bundle?) {
         lifecycle.addObserver(mPresenter)
         mPresenter.attachView(this)
-//        animation_view.setOnClickListener {
-//            mPresenter.showData()
-//            val request = PeriodicWorkRequest.Builder(Worker::class.java, 3, TimeUnit.SECONDS).build()
-//            WorkManager.getInstance().enqueue(request)
-//        }
 
         observerPattern()
 
         proxyPattern()
-
         httpFuel()
+        mViewModel = getViewModel()
+        mViewModel.getPsw().observe(this, androidx.lifecycle.Observer {
+
+        })
+
+        addFragment()
 
 
     }
+
+    private fun addFragment() {
+        btn_navigation.setOnClickListener {
+            startActivity(Intent(this, Main2Activity::class.java))
+        }
+    }
+
+//    override fun update(o: Observable?, arg: Any?) {
+//        Log.i("hello", arg.toString())
+//    }
 
     private fun httpFuel() {
 
@@ -80,7 +94,9 @@ class MainActivity : BaseActivity(), MainContact.View {
                     }, failure = {})
                 }
         compositeDisposable.add(disposable)
+
     }
+
 
     /**
      * 代理模式
@@ -99,7 +115,7 @@ class MainActivity : BaseActivity(), MainContact.View {
      */
     private fun observerPattern() {
         val sub = SubjectCat()
-        sub.addObserver(this)
+//        sub.addObserver(this)
         sub.setData()
     }
 
@@ -108,6 +124,18 @@ class MainActivity : BaseActivity(), MainContact.View {
         super.onDestroy()
         compositeDisposable.dispose()
 
+    }
+
+    /**
+     * 指定的线程类型中被调用
+     * @UiThread
+     * @MainThread
+     * @WorkerThread
+     * @BinderThread
+     */
+    @MainThread
+    fun thread() {
+        androidx.navigation.fragment.NavHostFragment()
     }
 
 }

@@ -1,0 +1,9 @@
+ext.deps = [:]
+
+def versions = [:]
+versions.kotlin = "1.2.71"
+
+def navigation =[:]
+navigation.fragment  =""
+
+

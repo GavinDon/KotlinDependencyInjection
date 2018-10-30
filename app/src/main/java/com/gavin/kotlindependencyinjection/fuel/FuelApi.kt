@@ -29,7 +29,7 @@ sealed class FuelApi : FuelRouting {
         override val params: List<Pair<String, Any?>>?
             get() = null
         override val path: String
-            get() = "api/${location}/search/"
+            get() = "api/$location/search/"
 
     }
 
